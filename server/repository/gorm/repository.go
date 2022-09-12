@@ -1,19 +1,16 @@
 package gorm
 
 import (
-	"github.com/growthers/enshita/server/util"
 	"gorm.io/gorm"
 )
 
 type Repository struct {
-	db              *gorm.DB
-	passwordEncoder util.PasswordEncoder
+	db *gorm.DB
 }
 
-func NewGormRepository(db *gorm.DB, paswodEncorder util.PasswordEncoder) *Repository {
+func NewGormRepository(db *gorm.DB) *Repository {
 	repo := &Repository{
-		db:              db,
-		passwordEncoder: paswodEncorder,
+		db: db,
 	}
 
 	return repo

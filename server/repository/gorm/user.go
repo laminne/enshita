@@ -3,6 +3,7 @@ package gorm
 import (
 	"github.com/google/uuid"
 	"github.com/growthers/enshita/server/model/domain"
+	"github.com/growthers/enshita/server/util"
 )
 
 // CreateUser ユーザーを作成
@@ -15,7 +16,8 @@ func (repo *Repository) CreateUser(userID, email, userName, password string, rol
 		Role:     role,
 	}
 
-	encodedPassword, err := repo.passwordEncoder.EncodePassword(password)
+	encoder := util.NewArgon2PasswordEncoder()
+	encodedPassword, err := encoder.EncodePassword(password)
 	if err != nil {
 		return nil, err
 	}
